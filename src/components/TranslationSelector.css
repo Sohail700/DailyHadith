@@ -1,0 +1,18 @@
+.translation-selector {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: #f9f6f1;
+  border: 1px solid #bba16b;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(187, 161, 107, 0.08);
+  z-index: 10;
+}
+.translation-selector select {
+  font-size: 1rem;
+  border: none;
+  background: transparent;
+  color: #6d4c1b;
+  outline: none;
+} 
