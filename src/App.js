@@ -21,9 +21,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [totalHadith, setTotalHadith] = useState(0);
   const [hadithIndex, setHadithIndex] = useState(0);
+  const [allHadiths, setAllHadiths] = useState([]);
 
   // Fetch hadith counts and a random hadith
-  const fetchHadith = async (lang = language) => {
+  const fetchHadith = async (lang = language, index = null) => {
     setLoading(true);
     try {
       // Fetch Arabic and translation hadith lists
@@ -38,7 +39,12 @@ function App() {
       const arabicData = await arabicRes.json();
       const transData = await transRes.json();
       const max = arabicData.hadiths.length;
-      const idx = getRandomHadithIndex(max);
+
+      // Store all hadiths for the dropdown
+      setAllHadiths(arabicData.hadiths);
+
+      // Use provided index or generate random one
+      const idx = index !== null ? index : getRandomHadithIndex(max);
       setHadith(arabicData.hadiths[idx]);
       setTranslation(transData.hadiths[idx]);
       setTotalHadith(max);
@@ -63,11 +69,17 @@ function App() {
     fetchHadith(language);
   };
 
+  const handleHadithSelect = (index) => {
+    fetchHadith(language, index);
+  };
+
   return (
     <div className="app-container">
       <TopBar
         title={"Sahih Bukhari"}
         number={hadith && hadith.number ? hadith.number : undefined}
+        hadiths={allHadiths}
+        onHadithSelect={handleHadithSelect}
       />
       {loading ? (
         <div className="loading">Loading...</div>
@@ -87,7 +99,6 @@ function App() {
             surahName={`Sahih Bukhari ${hadith.number}`}
             surahNumber={hadith.number}
           />
-          
         </>
       ) : (
         <div className="error">Failed to load Hadith. Try again.</div>
@@ -97,7 +108,12 @@ function App() {
         onChange={handleLanguageChange}
       />
       <div className="bottom-bar">
-        <a style={{ textDecoration: "none", color: "white" }} href="https://www.instagram.com/suhaiylk/">By Suhail</a>
+        <a
+          style={{ textDecoration: "none", color: "white" }}
+          href="https://www.instagram.com/suhaiylk/"
+        >
+          By Suhail
+        </a>
       </div>
     </div>
   );
