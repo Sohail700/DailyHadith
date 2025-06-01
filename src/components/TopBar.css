@@ -21,6 +21,10 @@
   height: 100%;
 }
 
+.top-bar-svg text {
+  font-size: 50px !important;
+}
+
 .dropdown-button {
   background: none;
   border: none;
