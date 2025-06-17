@@ -110,7 +110,6 @@ function App() {
       <div className="bottom-bar">
         <a
           style={{ textDecoration: "none", color: "white" }}
-          "
         >
           By S khan 
         </a>
