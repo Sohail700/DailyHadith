@@ -110,9 +110,9 @@ function App() {
       <div className="bottom-bar">
         <a
           style={{ textDecoration: "none", color: "white" }}
-          href="https://www.instagram.com/suhaiylk/"
+          "
         >
-          By Suhail
+          By S khan 
         </a>
       </div>
     </div>
